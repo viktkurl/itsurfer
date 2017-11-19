@@ -45,4 +45,12 @@ dependencies {
 
     // view binding
     implementation 'com.github.rubengees:kotterknife:1.0'
+
+    // architecture components
+    implementation "android.arch.lifecycle:extensions:1.0.0"
+
+    implementation 'pl.droidsonroids:jspoon:1.0.1'
+    implementation 'pl.droidsonroids.retrofit2:converter-jspoon:1.0.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
 }
