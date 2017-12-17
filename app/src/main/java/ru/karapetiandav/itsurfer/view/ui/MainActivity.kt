@@ -10,6 +10,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            }
+        }
+
         supportFragmentManager
             .beginTransaction()
             .add(R.id.main_activity_container, EventsListFragment())

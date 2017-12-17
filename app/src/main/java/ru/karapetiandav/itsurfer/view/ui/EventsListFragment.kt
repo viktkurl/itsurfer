@@ -10,9 +10,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotterknife.bindView
-
 import ru.karapetiandav.itsurfer.R
 import ru.karapetiandav.itsurfer.model.Event
 import ru.karapetiandav.itsurfer.view.adapter.EventsAdapter
@@ -48,7 +46,11 @@ class EventsListFragment : Fragment() {
             if (it != null) {
                 eventsAdapter = EventsAdapter(it, object : OnItemClickListener {
                     override fun onItemClick(event: Event) {
-                        Toast.makeText(context, "!!!", Toast.LENGTH_SHORT).show()
+                        activity!!.supportFragmentManager
+                            .beginTransaction()
+                            .add(R.id.main_activity_container, EventDetailsFragment())
+                            .addToBackStack(EventDetailsFragment.EVENT_DETAILS_FRAGMENT_TAG)
+                            .commit()
                     }
 
                 })
