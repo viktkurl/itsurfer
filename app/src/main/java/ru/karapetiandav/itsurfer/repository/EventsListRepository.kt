@@ -2,6 +2,7 @@ package ru.karapetiandav.itsurfer.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import pl.droidsonroids.retrofit2.JspoonConverterFactory
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,9 +11,12 @@ import retrofit2.Retrofit
 import ru.karapetiandav.itsurfer.model.Event
 import ru.karapetiandav.itsurfer.model.EventsPage
 
+private val TAG = EventsListRepository::class.simpleName
+
 class EventsListRepository {
 
     companion object {
+
         val URL = "https://it-events.com/"
 
         private fun createRetrofit(): Retrofit {
@@ -33,7 +37,8 @@ class EventsListRepository {
                 }
 
                 override fun onFailure(call: Call<EventsPage>?, t: Throwable?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Log.d(TAG, t?.message)
+                    data.value = emptyList()
                 }
             })
 

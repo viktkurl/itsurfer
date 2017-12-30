@@ -1,9 +1,36 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         tools:context="ru.karapetiandav.itsurfer.view.ui.EventDetailsFragment">
+
+    <TextView
+            android:id="@+id/textview_event_details_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            tools:text="Проектная школа программирования GoTo"/>
+
+    <TextView
+            android:id="@+id/textview_event_details_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textview_event_details_title"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            tools:text="2 января 2018 (вт), 11:00 - 9 января 2018 (вт), 18:00"/>
 
 </android.support.constraint.ConstraintLayout>

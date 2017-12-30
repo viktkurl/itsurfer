@@ -14,4 +14,7 @@ class Event {
 
     @Selector(".event-list-item__info_location")
     var location: String? = null
+
+    @Selector(".event-list-item__info_online")
+    var isOnline: String? = null
 }

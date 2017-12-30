@@ -21,7 +21,7 @@ class EventsAdapter(private val events: List<Event>, private val listener: OnIte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val event = events[position]
-        checkIsWebinar(event)
+        checkIsOnline(event)
         holder.eventTitle.text = event.title
         holder.eventDate.text = event.date
         holder.eventLocation.text = event.location
@@ -29,9 +29,9 @@ class EventsAdapter(private val events: List<Event>, private val listener: OnIte
         holder.bind(event, listener)
     }
 
-    private fun checkIsWebinar(event: Event) {
+    private fun checkIsOnline(event: Event) {
         if (event.type?.contains("вебинар", true) != false
-            || event.type?.contains("онлайн", true) != false) {
+            || event.isOnline?.contains("онлайн", true) != false) {
             event.location = event.type
         }
     }

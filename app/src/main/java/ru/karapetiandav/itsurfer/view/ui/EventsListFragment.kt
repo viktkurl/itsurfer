@@ -19,14 +19,16 @@ import ru.karapetiandav.itsurfer.viewmodel.EventsListViewModel
 
 class EventsListFragment : Fragment() {
 
-    private lateinit var eventsAdapter: EventsAdapter
-
     // kotterknife
     private val eventsRecyclerView: RecyclerView by bindView(R.id.recyclerview_events_list)
     // ----
 
+    private lateinit var eventsAdapter: EventsAdapter
+    private var myRoot: View? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_events_list, container, false)
+        if (myRoot == null) myRoot = inflater.inflate(R.layout.fragment_events_list, container, false)
+        return myRoot
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -37,26 +39,26 @@ class EventsListFragment : Fragment() {
         eventsRecyclerView.layoutManager = layoutManager
         eventsRecyclerView.addItemDecoration(itemDivider)
 
-        val viewModel = ViewModelProviders.of(this).get(EventsListViewModel::class.java)
+        val viewModel = activity!!.let { ViewModelProviders.of(it).get(EventsListViewModel::class.java) }
         observeViewModel(viewModel)
     }
 
     private fun observeViewModel(viewModel: EventsListViewModel) {
-        viewModel.eventsListObservable.observe(this, Observer<List<Event>> {
-            if (it != null) {
+        viewModel.eventsListObservable.observe(activity!!, Observer {
+            it?.let {
                 eventsAdapter = EventsAdapter(it, object : OnItemClickListener {
                     override fun onItemClick(event: Event) {
                         activity!!.supportFragmentManager
                             .beginTransaction()
-                            .add(R.id.main_activity_container, EventDetailsFragment())
+                            .replace(R.id.main_activity_container, EventDetailsFragment())
                             .addToBackStack(EventDetailsFragment.EVENT_DETAILS_FRAGMENT_TAG)
                             .commit()
-                    }
 
+                        viewModel.select(event)
+                    }
                 })
                 eventsRecyclerView.adapter = eventsAdapter
             }
         })
     }
-
 }
