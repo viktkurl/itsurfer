@@ -40,13 +40,6 @@ dependencies {
     // html parser
     implementation 'org.jsoup:jsoup:1.10.3'
 
-    // kodein (DI)
-    implementation 'com.github.salomonbrys.kodein:kodein:4.1.0'
-    implementation 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
-
-    // view binding
-    implementation 'com.github.rubengees:kotterknife:1.0'
-
     // architecture components
     implementation "android.arch.lifecycle:extensions:1.0.0"
 

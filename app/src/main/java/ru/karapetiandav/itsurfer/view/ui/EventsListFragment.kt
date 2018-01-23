@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_events_list.*
-import kotterknife.bindView
 import ru.karapetiandav.itsurfer.R
 import ru.karapetiandav.itsurfer.model.Event
 import ru.karapetiandav.itsurfer.repository.EventsListRepository.Companion.PAGE_SIZE
@@ -24,10 +23,6 @@ import ru.karapetiandav.itsurfer.view.adapter.OnItemClickListener
 import ru.karapetiandav.itsurfer.viewmodel.EventsListViewModel
 
 class EventsListFragment : Fragment() {
-
-    // kotterknife
-    private val eventsRecyclerView: RecyclerView by bindView(R.id.recyclerview_events_list)
-    // ----
 
     private var positionToScroll = 0
 
@@ -47,9 +42,9 @@ class EventsListFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
         val itemDivider = DividerItemDecoration(context, layoutManager.orientation)
-        eventsRecyclerView.layoutManager = layoutManager
-        eventsRecyclerView.addItemDecoration(itemDivider)
-        eventsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        recyclerviewEventsList.layoutManager = layoutManager
+        recyclerviewEventsList.addItemDecoration(itemDivider)
+        recyclerviewEventsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val visibleItemCount = layoutManager.childCount
@@ -82,8 +77,8 @@ class EventsListFragment : Fragment() {
                         viewModel.select(event)
                     }
                 })
-                eventsRecyclerView.adapter = eventsAdapter
-                eventsRecyclerView.scrollToPosition(positionToScroll + 1)
+                recyclerviewEventsList.adapter = eventsAdapter
+                recyclerviewEventsList.scrollToPosition(positionToScroll + 1)
             }
         })
 
